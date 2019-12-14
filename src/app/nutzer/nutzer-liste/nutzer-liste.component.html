@@ -1,0 +1,7 @@
+<h1>Nutzer</h1>
+<div *ngFor="let nutzer of nutzerListe" style="width: 300px;">
+  <app-nutzer-details [nutzer]='nutzer'></app-nutzer-details>
+</div>
+<div style="margin-top:20px;">
+  <button type="button" class="button btn-danger" (click)='deleteNutzer()'>Delete All</button>
+</div>
