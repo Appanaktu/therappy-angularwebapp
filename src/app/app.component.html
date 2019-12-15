@@ -1,13 +1,38 @@
 <div class="container-fluid">
-  <div style="color: blue;">
-    <h1>{{title}}</h1>
-    <h3>{{description}}</h3>
-  </div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+      </button>
+      <span class="menu-spacer"></span>
+      <div>
+        <a mat-button [routerLink]="'/nutzer'"> Nutzer </a>
+        <a mat-button [routerLink]="'/add'"> Erstelle Nutzer </a>
+        <a mat-button [routerLink]="'/nutzer'"> Termine </a>
+        <a mat-button [routerLink]="'/nutzer'"> Erstelle Termin </a>
+        <a mat-button [routerLink]="'/nutzer'"> Kontakt </a>
 
+      </div>
+      </mat-toolbar-row>
+  </mat-toolbar>
 
-  <nav>
-    <a routerLink="nutzer" class="btn btn-primary active" role="button" routerLinkActive="active">Nutzer</a>
-    <a routerLink="add" class="btn btn-primary active" role="button" routerLinkActive="active">Add</a>
-  </nav>
-  <router-outlet></router-outlet>
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="'over'">
+      <mat-nav-list>
+
+        <a mat-list-item [routerLink]="'/nutzer'"> Nutzer </a>
+        <a mat-list-item [routerLink]="'/add'"> Erstelle Nutzer </a>
+        <a mat-list-item [routerLink]="'/nutzer'"> Termine </a>
+        <a mat-list-item [routerLink]="'/nutzer'"> Erstelle Termine </a>
+        <a mat-list-item [routerLink]="'/nutzer'"> Kontakt </a>
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content style="min-height: 40vh">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>  
 </div>

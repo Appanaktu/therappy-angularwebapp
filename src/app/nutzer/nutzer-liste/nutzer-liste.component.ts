@@ -8,6 +8,8 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./nutzer-liste.component.css']
 })
 export class NutzerListeComponent implements OnInit {
+
+  titel = 'Nutzer';
  
   nutzerListe: any;
  
