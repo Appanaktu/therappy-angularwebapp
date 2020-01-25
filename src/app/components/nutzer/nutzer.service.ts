@@ -8,29 +8,29 @@ import { Nutzer } from './nutzer';
 export class NutzerService {
 
   private dbPath = '/Nutzer';
- 
+
   nutzerRef: AngularFirestoreCollection<Nutzer> = null;
- 
+
   constructor(private db: AngularFirestore) {
     this.nutzerRef = db.collection(this.dbPath);
   }
- 
+
   createNutzer(nutzer: Nutzer): void {
     this.nutzerRef.add({...nutzer});
   }
- 
+
   updateNutzer(key: string, value: any): Promise<void> {
     return this.nutzerRef.doc(key).update(value);
   }
- 
+
   deleteNutzer(key: string): Promise<void> {
     return this.nutzerRef.doc(key).delete();
   }
- 
+
   getNutzerListe(): AngularFirestoreCollection<Nutzer> {
     return this.nutzerRef;
   }
- 
+
   deleteAll() {
     this.nutzerRef.get().subscribe(
       querySnapshot => {
@@ -41,5 +41,5 @@ export class NutzerService {
       error => {
         console.log('Error: ', error);
       });
-  }  
+  }
 }
