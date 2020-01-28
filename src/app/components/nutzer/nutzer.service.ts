@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore,
+         AngularFirestoreCollection,
+         AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Nutzer } from './nutzer';
 
 @Injectable({
@@ -29,6 +31,10 @@ export class NutzerService {
 
   getNutzerListe(): AngularFirestoreCollection<Nutzer> {
     return this.nutzerRef;
+  }
+
+  getNutzer(key: string): AngularFirestoreDocument<Nutzer> {
+    return this.nutzerRef.doc(key);
   }
 
   deleteAll() {

@@ -1,6 +1,6 @@
 export class Nutzer {
 	key: string;
-	name: string;
-	age: number;
-	active = true;
+	vorname: string;
+	nachname: string;
+	qualifikation: string;
 }

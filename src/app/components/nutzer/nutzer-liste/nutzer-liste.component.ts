@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NutzerService } from '../nutzer.service';
 import { map } from 'rxjs/operators';
 import { Nutzer } from './../nutzer';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-nutzer-liste',
@@ -10,14 +11,21 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./nutzer-liste.component.css']
 })
 export class NutzerListeComponent implements OnInit {
-
+  public showUpdate = '';
+  public showDetails = '';
+  public currentKey = '';
   public displayedColumns = ['vorname', 'nachname', 'qualifikation','details', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Nutzer>();
 
-  constructor(private nutzerService: NutzerService) { }
+  constructor(private nutzerService: NutzerService ) { }
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
     this.getNutzerListe();
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   getNutzerListe() {
@@ -36,15 +44,35 @@ export class NutzerListeComponent implements OnInit {
     this.nutzerService.deleteAll();
   }
 
-  public redirectToDetails = (id: string) => {
-
+  public doFilter = (value: string) => {
+    this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  public redirectToUpdate = (id: string) => {
+  public redirectToDetails = (key: string) => {
+    if (this.showDetails == '') {
+      this.showDetails = 'show';
+      this.currentKey = key;
+      this.showUpdate = ''
 
+    } else {
+      this.showDetails = ''
+      this.currentKey = '';
+    };
   }
 
-  public redirectToDelete = (id: string) => {
+  public redirectToUpdate = (key: string) => {
+    if (this.showUpdate == '') {
+      this.showUpdate = 'show';
+      this.showDetails = ''
 
+    } else {
+      this.showUpdate = ''
+    };
+  }
+
+  public redirectToDelete = (key: string) => {
+    this.nutzerService
+      .deleteNutzer(key)
+      .catch(err => console.log(err));
   }
 }

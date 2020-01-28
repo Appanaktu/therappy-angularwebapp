@@ -1,19 +1,33 @@
-<div *ngIf="nutzer">
-  <div>
-    <label>First Name: </label> {{nutzer.name}}
-  </div>
-  <div>
-    <label>Age: </label> {{nutzer.age}}
-  </div>
-  <div>
-    <label>Active: </label> {{nutzer.active}}
-  </div>
- 
-  <span class="button is-small btn-primary" *ngIf='nutzer.active' (click)='updateActive(false)'>Inactive</span>
- 
-  <span class="button is-small btn-primary" *ngIf='!nutzer.active' (click)='updateActive(true)'>Active</span>
- 
-  <span class="button is-small btn-danger" (click)='deleteNutzer()'>Delete</span>
- 
-  <hr />
-</div>
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Details zum ausgewählten Nutzer</mat-card-title>
+      <mat-card-content>
+        <div fxLayout="column wrap" fxLayoutGap="40px">
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Vorname:</strong></div>
+            <div fxFlex>{{nutzer?.vorname}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Nachname:</strong></div>
+            <div fxFlex>{{nutzer?.nachname}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Qualifikation:</strong></div>
+            <div fxFlex>{{nutzer?.qualifikation}}</div>
+          </div>
+
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-form-field>
+          <mat-select placeholder="Show accounts" (selectionChange)="onChange($event)">
+            <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-actions>
+    </mat-card>
+</section>
