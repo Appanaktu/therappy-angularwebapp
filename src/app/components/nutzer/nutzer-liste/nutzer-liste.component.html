@@ -1,8 +1,5 @@
 <h1>Nutzer</h1>
 
-<app-nutzer-details *ngIf='showDetails' [key]='currentKey'></app-nutzer-details>
-<app-erstelle-nutzer *ngIf='showUpdate'></app-erstelle-nutzer>
-
 <div fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
     <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter">
@@ -57,5 +54,13 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
+<div>
+  <a [routerLink]="['/nutzer/bearbeiten']" mat-button color="primary">
+    <mat-icon class="mat-18"> add_circle_outline</mat-icon> Nutzer hinzufügen
+  </a>
+</div>
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
 </mat-paginator>
+
+<app-nutzer-details *ngIf='showDetails' [key]='currentKey'></app-nutzer-details>
+<app-erstelle-nutzer *ngIf='showUpdate'></app-erstelle-nutzer>

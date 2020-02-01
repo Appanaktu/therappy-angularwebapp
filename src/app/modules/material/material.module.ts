@@ -14,7 +14,11 @@ import { MatTabsModule,
          MatInputModule,
          MatPaginatorModule,
          MatCardModule,
-         MatSelectModule } from  '@angular/material';
+         MatSelectModule,
+         MatDatepickerModule,
+         MatNativeDateModule,
+         MatDialogModule,
+         MatProgressBarModule } from  '@angular/material';
 
 @NgModule({
   imports: [
@@ -33,7 +37,11 @@ import { MatTabsModule,
     MatInputModule,
     MatPaginatorModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatProgressBarModule
   ],
   exports: [
     MatTabsModule,
@@ -50,7 +58,11 @@ import { MatTabsModule,
     MatInputModule,
     MatPaginatorModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatProgressBarModule
   ],
   declarations: []
 })

@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MaterialModule } from './modules/material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NutzerDetailsComponent } from './components/nutzer/nutzer-details/nutzer-details.component';
 import { NutzerListeComponent } from './components/nutzer/nutzer-liste/nutzer-liste.component';
@@ -23,6 +24,9 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavListComponent } from './components/navigation/sidenav-list/sidenav-list.component';
 import { FooterComponent } from './components/navigation/footer/footer.component';
+import { SuccessDialogComponent } from './components/dialogs/success-dialog/success-dialog.component';
+import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-dialog.component';
+import { NotFoundComponent } from './components/error-pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,10 @@ import { FooterComponent } from './components/navigation/footer/footer.component
     LayoutComponent,
     HomeComponent,
     SidenavListComponent,
-    FooterComponent
+    FooterComponent,
+    SuccessDialogComponent,
+    ErrorDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,12 @@ import { FooterComponent } from './components/navigation/footer/footer.component
     AngularFirestoreModule,
     BrowserAnimationsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    SuccessDialogComponent,
+    ErrorDialogComponent
   ],
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

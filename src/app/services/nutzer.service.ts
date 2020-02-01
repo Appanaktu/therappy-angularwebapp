@@ -17,8 +17,8 @@ export class NutzerService {
     this.nutzerRef = db.collection(this.dbPath);
   }
 
-  createNutzer(nutzer: Nutzer): void {
-    this.nutzerRef.add({...nutzer});
+  public createNutzer = (nutzer: Nutzer) => {
+    return this.nutzerRef.add({...nutzer});
   }
 
   updateNutzer(key: string, value: any): Promise<void> {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NutzerService } from '../nutzer.service';
+import { NutzerService } from '../../../services/nutzer.service';
 import { map } from 'rxjs/operators';
 import { Nutzer } from './../nutzer';
 import { MatTableDataSource, MatPaginator } from '@angular/material';

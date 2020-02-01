@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NutzerService } from '../nutzer.service';
+import { NutzerService } from '../../../services/nutzer.service';
 import { Nutzer } from '../nutzer';
 import { MatCardModule} from '@angular/material';
 import { map } from 'rxjs/operators';
