@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NutzerService } from '../../../services/nutzer.service';
 import { map } from 'rxjs/operators';
-import { Nutzer } from './../nutzer';
+import { Nutzer } from './../_interface/nutzer.model';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material';
+
+import { NutzerBearbeitungComponent } from './../nutzer-bearbeitung/nutzer-bearbeitung.component';
+import { NutzerDetailsComponent } from './../nutzer-details/nutzer-details.component';
 
 @Component({
   selector: 'app-nutzer-liste',
@@ -16,8 +20,9 @@ export class NutzerListeComponent implements OnInit {
   public currentKey = '';
   public displayedColumns = ['vorname', 'nachname', 'qualifikation','details', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Nutzer>();
+  private dialogConfig;
 
-  constructor(private nutzerService: NutzerService ) { }
+  constructor(private nutzerService: NutzerService, private dialog: MatDialog ) { }
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -26,6 +31,9 @@ export class NutzerListeComponent implements OnInit {
     this.getNutzerListe();
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.dialogConfig = {
+      data: { }
+    }
   }
 
   getNutzerListe() {
@@ -49,25 +57,13 @@ export class NutzerListeComponent implements OnInit {
   }
 
   public redirectToDetails = (key: string) => {
-    if (this.showDetails == '') {
-      this.showDetails = 'show';
-      this.currentKey = key;
-      this.showUpdate = ''
-
-    } else {
-      this.showDetails = ''
-      this.currentKey = '';
-    };
+    this.dialogConfig.data = { 'key': key };
+    let dialogRef = this.dialog.open(NutzerDetailsComponent, this.dialogConfig);
   }
 
   public redirectToUpdate = (key: string) => {
-    if (this.showUpdate == '') {
-      this.showUpdate = 'show';
-      this.showDetails = ''
-
-    } else {
-      this.showUpdate = ''
-    };
+    this.dialogConfig.data = { 'key': key };
+    let dialogRef = this.dialog.open(NutzerBearbeitungComponent, this.dialogConfig);
   }
 
   public redirectToDelete = (key: string) => {

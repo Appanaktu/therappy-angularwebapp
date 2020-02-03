@@ -1,21 +1,39 @@
-<section fxLayout="row wrap" fxLayoutAlign="center center">
-  <mat-card fxFlex="500px" fxFlex.xs="100%">
-      <mat-card-title>Details zum ausgewählten Nutzer</mat-card-title>
+<section fxLayout="column" fxLayoutAlign="center center">
+  <h1 mat-dialog-title>Nutzerdetails</h1>
+  <mat-dialog-content>
+    <mat-card fxFlex="500px" fxFlex.xs="100%">
       <mat-card-content>
         <div fxLayout="column wrap" fxLayoutGap="40px">
           <div fxLayout="row wrap" fxFlex>
             <div fxFlex><strong>Vorname:</strong></div>
             <div fxFlex>{{nutzer?.vorname}}</div>
-          </div>
 
-          <div fxLayout="row wrap" fxFlex>
             <div fxFlex><strong>Nachname:</strong></div>
             <div fxFlex>{{nutzer?.nachname}}</div>
+
+            <div fxFlex><strong>Geburtsdatum:</strong></div>
+            <div fxFlex>{{nutzer?.geburtsdatum}}</div>
           </div>
 
           <div fxLayout="row wrap" fxFlex>
             <div fxFlex><strong>Qualifikation:</strong></div>
             <div fxFlex>{{nutzer?.qualifikation}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Strasse:</strong></div>
+            <div fxFlex>{{nutzer?.strasse}}</div>
+            <div fxFlex><strong>Hausnummer:</strong></div>
+            <div fxFlex>{{nutzer?.hausnummer}}</div>
+          </div>
+
+          <div fxLayout="row wrap" fxFlex>
+            <div fxFlex><strong>Postleitzahl:</strong></div>
+            <div fxFlex>{{nutzer?.postleitzahl}}</div>
+            <div fxFlex><strong>Stadt:</strong></div>
+            <div fxFlex>{{nutzer?.stadt}}</div>
+            <div fxFlex><strong>Land:</strong></div>
+            <div fxFlex>{{nutzer?.land}}</div>
           </div>
 
         </div>
@@ -30,4 +48,8 @@
         </mat-form-field>
       </mat-card-actions>
     </mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="closeDialog()">Fertig</button>
+  </mat-dialog-actions>
 </section>

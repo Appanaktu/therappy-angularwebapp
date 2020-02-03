@@ -55,12 +55,9 @@
 </table>
 
 <div>
-  <a [routerLink]="['/nutzer/bearbeiten']" mat-button color="primary">
+  <button mat-icon-button color="primary" (click)="redirectToUpdate()">
     <mat-icon class="mat-18"> add_circle_outline</mat-icon> Nutzer hinzufügen
-  </a>
+  </button>
 </div>
 <mat-paginator [pageSize]="10" [pageSizeOptions]="[2, 4, 6, 10, 20]">
 </mat-paginator>
-
-<app-nutzer-details *ngIf='showDetails' [key]='currentKey'></app-nutzer-details>
-<app-erstelle-nutzer *ngIf='showUpdate'></app-erstelle-nutzer>

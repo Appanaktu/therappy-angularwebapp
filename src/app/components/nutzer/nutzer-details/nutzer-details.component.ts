@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NutzerService } from '../../../services/nutzer.service';
-import { Nutzer } from '../nutzer';
+import { Nutzer } from './../_interface/nutzer.model';
+import { NutzerDaten } from './../_interface/nutzerDaten.model';
 import { MatCardModule} from '@angular/material';
 import { map } from 'rxjs/operators';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-nutzer-details',
@@ -13,16 +15,14 @@ export class NutzerDetailsComponent implements OnInit {
 
   public nutzer: Nutzer;
 
-  @Input () key: string;
-
-  constructor(private nutzerService: NutzerService ) { }
+  constructor(private nutzerService: NutzerService, public dialogRef: MatDialogRef<NutzerDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.getNutzer();
+    this.getNutzer(this.data.key);
   }
 
-  getNutzer() {
-    this.nutzerService.getNutzer(this.key).snapshotChanges().pipe(
+  getNutzer(key: string) {
+    this.nutzerService.getNutzer(key).snapshotChanges().pipe(
       map(action => {
           const data = action.payload.data() as any;
           const id = action.payload.id;
@@ -33,10 +33,7 @@ export class NutzerDetailsComponent implements OnInit {
     });
   }
 
-  updateActive(isActive: boolean) {
-    this.nutzerService
-      .updateNutzer(this.nutzer.key, { active: isActive })
-      .catch(err => console.log(err));
+  public closeDialog = () => {
+    this.dialogRef.close();
   }
-
 }

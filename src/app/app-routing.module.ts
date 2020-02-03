@@ -1,6 +1,5 @@
-import { ErstelleNutzerComponent } from './components/nutzer/erstelle-nutzer/erstelle-nutzer.component';
+import { NutzerBearbeitungComponent } from './components/nutzer/nutzer-bearbeitung/nutzer-bearbeitung.component';
 import { NutzerListeComponent } from './components/nutzer/nutzer-liste/nutzer-liste.component';
-import { NutzerDetailsComponent } from './components/nutzer/nutzer-details/nutzer-details.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/error-pages/not-found/not-found.component';
 
@@ -11,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent},
   { path: 'nutzer', component: NutzerListeComponent },
-  { path: 'nutzer/bearbeiten', component: ErstelleNutzerComponent },
+  { path: 'nutzer/bearbeiten', component: NutzerBearbeitungComponent },
   { path: '404', component: NotFoundComponent},
   { path: '**', redirectTo: '/404', pathMatch: 'full'}
 ];

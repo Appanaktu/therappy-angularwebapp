@@ -1,0 +1,11 @@
+mat-form-field{
+    padding-right: 10px;
+}
+mat-card-title{
+    text-align: center;
+}
+
+div {
+  fxLayout: "row wrap";
+  fxLayoutGap: "40px";
+}

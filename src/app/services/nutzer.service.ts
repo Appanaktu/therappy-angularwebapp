@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore,
          AngularFirestoreCollection,
          AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Nutzer } from './nutzer';
+import { Nutzer } from './../components/nutzer/_interface/nutzer.model';
+import { NutzerDaten } from './../components/nutzer/_interface/nutzerDaten.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,17 @@ export class NutzerService {
 
   private dbPath = '/Nutzer';
 
-  nutzerRef: AngularFirestoreCollection<Nutzer> = null;
+  nutzerRef: AngularFirestoreCollection<any> = null;
 
   constructor(private db: AngularFirestore) {
     this.nutzerRef = db.collection(this.dbPath);
   }
 
-  public createNutzer = (nutzer: Nutzer) => {
-    return this.nutzerRef.add({...nutzer});
+  public createNutzer = (nutzerDaten: NutzerDaten) => {
+    return this.nutzerRef.add({...nutzerDaten});
   }
 
-  updateNutzer(key: string, value: any): Promise<void> {
+  public updateNutzer = (key: string, value: any) => {
     return this.nutzerRef.doc(key).update(value);
   }
 

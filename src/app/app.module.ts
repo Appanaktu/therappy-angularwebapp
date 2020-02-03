@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { NutzerDetailsComponent } from './components/nutzer/nutzer-details/nutzer-details.component';
 import { NutzerListeComponent } from './components/nutzer/nutzer-liste/nutzer-liste.component';
-import { ErstelleNutzerComponent } from './components/nutzer/erstelle-nutzer/erstelle-nutzer.component';
+import { NutzerBearbeitungComponent } from './components/nutzer/nutzer-bearbeitung/nutzer-bearbeitung.component';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
@@ -33,7 +33,7 @@ import { NotFoundComponent } from './components/error-pages/not-found/not-found.
     AppComponent,
     NutzerDetailsComponent,
     NutzerListeComponent,
-    ErstelleNutzerComponent,
+    NutzerBearbeitungComponent,
     HeaderComponent,
     LayoutComponent,
     HomeComponent,
@@ -58,7 +58,9 @@ import { NotFoundComponent } from './components/error-pages/not-found/not-found.
   ],
   entryComponents: [
     SuccessDialogComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    NutzerBearbeitungComponent,
+    NutzerDetailsComponent
   ],
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

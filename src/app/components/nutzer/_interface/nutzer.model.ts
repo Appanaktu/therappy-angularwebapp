@@ -1,6 +1,6 @@
-export interface Nutzer{
-  id: string;
-  vorname: string;
-  nachname: string;
-  qualifikation: string;
+import { NutzerDaten } from './nutzerDaten.model';
+
+export class Nutzer{
+  key: string;
+  nutzerDaten: NutzerDaten;
 }
