@@ -29,10 +29,11 @@
 
               <div>
                 <mat-form-field>
-                  <input matInput type="text" placeholder="Qualifikation" formControlName="qualifikation" id="qualifikation">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('qualifikation', 'required')">Qualifikation wird benötigt</mat-error>
-                  <mat-error *ngIf="hasError('qualifikation', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+                  <mat-label>Qualifikationen</mat-label>
+                  <mat-select formControlName="qualifikationen" id="qualifikationen" multiple>
+                    <mat-option *ngFor="let qualifikation of qualifikationenList" [value]="qualifikation.key">{{qualifikation.bezeichnung}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="hasError('qualifikationen', 'required')">Es wird mindestens eine Qualifikation benötigt</mat-error>
                 </mat-form-field>
               </div>
 

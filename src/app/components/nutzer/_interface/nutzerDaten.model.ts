@@ -1,7 +1,7 @@
 export interface NutzerDaten{
   vorname: string;
   nachname: string;
-  qualifikation: string;
+  qualifikationen: string[];
   geburtsdatum: Date;
   strasse: string;
   hausnummer: string;

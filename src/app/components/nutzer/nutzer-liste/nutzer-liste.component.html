@@ -1,4 +1,4 @@
-<h1>Nutzer</h1>
+<h1 class="mat-display-3" fxLayout fxLayoutAlign="center center">Nutzer</h1>
 
 <div fxLayout fxLayoutAlign="center center">
   <mat-form-field fxFlex="40%">
@@ -16,11 +16,6 @@
   <ng-container matColumnDef="nachname">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nachname </th>
     <td mat-cell *matCellDef="let element"> {{element.nachname}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="qualifikation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Qualifikation </th>
-    <td mat-cell *matCellDef="let element"> {{element.qualifikation}} </td>
   </ng-container>
 
   <ng-container matColumnDef="details">

@@ -2,8 +2,12 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
+import { Qualifikation } from './../../qualifikationen/_interface/qualifikation.model';
+import { QualifikationenService } from '../../../services/qualifikationen.service';
+
 import { NutzerDaten } from './../_interface/nutzerDaten.model';
 import { NutzerService } from './../../../services/nutzer.service';
+
 import { ErrorHandlerService } from './../../../services/error-handler.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -19,15 +23,16 @@ export class NutzerBearbeitungComponent implements OnInit {
 
   public nutzerDaten: NutzerDaten;
   public nutzerForm: FormGroup;
+  public qualifikationenList: Qualifikation[]
   private dialogConfig;
-  constructor(private nutzerService: NutzerService, private dialog: MatDialog, private errorService: ErrorHandlerService, public dialogRef: MatDialogRef<NutzerBearbeitungComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private nutzerService: NutzerService, private qualifikationenService: QualifikationenService, private dialog: MatDialog, private errorService: ErrorHandlerService, public dialogRef: MatDialogRef<NutzerBearbeitungComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
   ngOnInit() {
     this.nutzerForm = new FormGroup({
       vorname: new FormControl('', [Validators.required, Validators.maxLength(60)]),
       nachname: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-      qualifikation: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+      qualifikationen: new FormControl('', [Validators.required, Validators.maxLength(100)]),
       geburtsdatum: new FormControl(new Date(),[Validators.required]),
       strasse: new FormControl('', [Validators.maxLength(100)]),
       hausnummer: new FormControl('', [Validators.maxLength(100)]),
@@ -35,6 +40,8 @@ export class NutzerBearbeitungComponent implements OnInit {
       stadt: new FormControl('', [Validators.maxLength(100)]),
       land: new FormControl('', [Validators.maxLength(100)]),
     });
+
+    this.getQualifiaktionenListe();
 
     if (this.data.key) {
       this.getNutzer(this.data.key);
@@ -63,6 +70,18 @@ export class NutzerBearbeitungComponent implements OnInit {
     });
   }
 
+  private getQualifiaktionenListe() {
+    this.qualifikationenService.getQualifikationenListe().snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c =>
+          ({ key: c.payload.doc.id, ...c.payload.doc.data() })
+        )
+      )
+    ).subscribe(res => {
+      this.qualifikationenList = res as Qualifikation[];
+    });
+  }
+
   public hasError = (controlName: string, errorName: string) =>{
     return this.nutzerForm.controls[controlName].hasError(errorName);
   }
@@ -81,7 +100,7 @@ export class NutzerBearbeitungComponent implements OnInit {
     let nutzerDaten: NutzerDaten = {
       vorname: nutzerFormValue.vorname,
       nachname: nutzerFormValue.nachname,
-      qualifikation: nutzerFormValue.qualifikation,
+      qualifikationen: nutzerFormValue.qualifikationen,
       geburtsdatum: nutzerFormValue.geburtsdatum,
       strasse: nutzerFormValue.strasse,
       hausnummer: nutzerFormValue.hausnummer,
@@ -113,12 +132,12 @@ export class NutzerBearbeitungComponent implements OnInit {
           .subscribe(result => {
             this.dialogRef.close();
           });
-        },
-        (error => {
-          this.errorService.dialogConfig = { ...this.dialogConfig };
-          this.errorService.handleFirstoreError("Update fehlgeschlagen");
-        })
-      );
+        }
+      )
+      .catch( error => {
+        this.errorService.dialogConfig = { ...this.dialogConfig };
+        this.errorService.handleFirstoreError("Update fehlgeschlagen");
+      });
     }
   }
 }

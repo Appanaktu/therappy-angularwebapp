@@ -27,6 +27,21 @@ import { FooterComponent } from './components/navigation/footer/footer.component
 import { SuccessDialogComponent } from './components/dialogs/success-dialog/success-dialog.component';
 import { ErrorDialogComponent } from './components/dialogs/error-dialog/error-dialog.component';
 import { NotFoundComponent } from './components/error-pages/not-found/not-found.component';
+import { QualifikationenListeComponent } from './components/qualifikationen/qualifikationen-liste/qualifikationen-liste.component';
+import { QualifikationenBearbeitungComponent } from './components/qualifikationen/qualifikationen-bearbeitung/qualifikationen-bearbeitung.component';
+import { QualifikationenDetailsComponent } from './components/qualifikationen/qualifikationen-details/qualifikationen-details.component';
+import { TherapieformenListeComponent } from './components/therapieformen/therapieformen-liste/therapieformen-liste.component';
+import { TherapieformenDetailsComponent } from './components/therapieformen/therapieformen-details/therapieformen-details.component';
+import { TherapieformenBearbeitungComponent } from './components/therapieformen/therapieformen-bearbeitung/therapieformen-bearbeitung.component';
+import { TermineListeComponent } from './components/termine/termine-liste/termine-liste.component';
+import { TermineDetailsComponent } from './components/termine/termine-details/termine-details.component';
+import { TermineBearbeitungComponent } from './components/termine/termine-bearbeitung/termine-bearbeitung.component';
+import { RegionenListeComponent } from './components/regionen/regionen-liste/regionen-liste.component';
+import { RegionenDetailsComponent } from './components/regionen/regionen-details/regionen-details.component';
+import { RegionenBearbeitungComponent } from './components/regionen/regionen-bearbeitung/regionen-bearbeitung.component';
+import { PflegeheimeListeComponent } from './components/pflegeheime/pflegeheime-liste/pflegeheime-liste.component';
+import { PflegeheimeDetailsComponent } from './components/pflegeheime/pflegeheime-details/pflegeheime-details.component';
+import { PflegeheimeBearbeitungComponent } from './components/pflegeheime/pflegeheime-bearbeitung/pflegeheime-bearbeitung.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +56,22 @@ import { NotFoundComponent } from './components/error-pages/not-found/not-found.
     FooterComponent,
     SuccessDialogComponent,
     ErrorDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    QualifikationenListeComponent,
+    QualifikationenBearbeitungComponent,
+    QualifikationenDetailsComponent,
+    TherapieformenListeComponent,
+    TherapieformenDetailsComponent,
+    TherapieformenBearbeitungComponent,
+    TermineListeComponent,
+    TermineDetailsComponent,
+    TermineBearbeitungComponent,
+    RegionenListeComponent,
+    RegionenDetailsComponent,
+    RegionenBearbeitungComponent,
+    PflegeheimeListeComponent,
+    PflegeheimeDetailsComponent,
+    PflegeheimeBearbeitungComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +90,17 @@ import { NotFoundComponent } from './components/error-pages/not-found/not-found.
     SuccessDialogComponent,
     ErrorDialogComponent,
     NutzerBearbeitungComponent,
-    NutzerDetailsComponent
+    NutzerDetailsComponent,
+    TermineBearbeitungComponent,
+    TermineDetailsComponent,
+    QualifikationenBearbeitungComponent,
+    QualifikationenDetailsComponent,
+    TherapieformenBearbeitungComponent,
+    TherapieformenDetailsComponent,
+    RegionenBearbeitungComponent,
+    RegionenDetailsComponent,
+    PflegeheimeBearbeitungComponent,
+    PflegeheimeDetailsComponent
   ],
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

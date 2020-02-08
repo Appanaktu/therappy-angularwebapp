@@ -8,7 +8,22 @@
     </mat-expansion-panel-header>
     <mat-nav-list dense>
         <a mat-list-item routerLink="/nutzer" (click)="onSidenavClose()">
-           <mat-icon>list</mat-icon><span class="nav-caption">Nutzer</span>
+           <mat-icon>group</mat-icon><span class="nav-caption">Nutzer</span>
+        </a>
+        <a mat-list-item routerLink="/termine" (click)="onSidenavClose()">
+           <mat-icon>directions_run</mat-icon><span class="nav-caption">Termine</span>
+        </a>
+        <a mat-list-item routerLink="/qualifikationen" (click)="onSidenavClose()">
+           <mat-icon>menu_book</mat-icon><span class="nav-caption">Qualifikationen</span>
+        </a>
+        <a mat-list-item routerLink="/therapieformen" (click)="onSidenavClose()">
+           <mat-icon>colorize</mat-icon><span class="nav-caption">Therapieformen</span>
+        </a>
+        <a mat-list-item routerLink="/regionen" (click)="onSidenavClose()">
+           <mat-icon>landscape</mat-icon><span class="nav-caption">Regionen</span>
+        </a>
+        <a mat-list-item routerLink="/pflegeheime" (click)="onSidenavClose()">
+           <mat-icon>local_hotel</mat-icon><span class="nav-caption">Pflegeheime</span>
         </a>
     </mat-nav-list>
   </mat-expansion-panel>

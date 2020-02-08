@@ -15,10 +15,7 @@ import { NutzerDetailsComponent } from './../nutzer-details/nutzer-details.compo
   styleUrls: ['./nutzer-liste.component.css']
 })
 export class NutzerListeComponent implements OnInit {
-  public showUpdate = '';
-  public showDetails = '';
-  public currentKey = '';
-  public displayedColumns = ['vorname', 'nachname', 'qualifikation','details', 'update', 'delete'];
+  public displayedColumns = ['vorname', 'nachname','details', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Nutzer>();
   private dialogConfig;
 
@@ -46,10 +43,6 @@ export class NutzerListeComponent implements OnInit {
     ).subscribe(res => {
       this.dataSource.data = res as Nutzer[];
     });
-  }
-
-  deleteNutzer() {
-    this.nutzerService.deleteAll();
   }
 
   public doFilter = (value: string) => {
