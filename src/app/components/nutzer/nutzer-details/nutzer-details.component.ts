@@ -18,13 +18,13 @@ export class NutzerDetailsComponent implements OnInit {
 
   public nutzerDaten: NutzerDaten;
   public nutzerForm: FormGroup;
-  public qualifikationenList: Qualifikation[]
+  public qualifikationenList = new Array();
 
   constructor(private nutzerService: NutzerService, private qualifikationenService: QualifikationenService, public dialogRef: MatDialogRef<NutzerDetailsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.nutzerForm = new FormGroup({
-      vorname: new FormControl({disabled: true}, []),
+      vorname: new FormControl('', []),
       nachname: new FormControl('', []),
       qualifikationen: new FormControl('', []),
       geburtsdatum: new FormControl(new Date(),[]),
@@ -36,8 +36,6 @@ export class NutzerDetailsComponent implements OnInit {
     });
 
     this.getNutzer(this.data.key);
-
-    this.getQualifiaktionenListe();
   }
 
   getNutzer(key: string) {
@@ -51,19 +49,24 @@ export class NutzerDetailsComponent implements OnInit {
       })
     ).subscribe(res => {
       this.nutzerDaten = res as NutzerDaten;
+      if(this.nutzerDaten.qualifikationen){
+        this.getQualifiaktionenListe();
+      };
       this.nutzerForm.patchValue(this.nutzerDaten);
+      this.nutzerForm.disable();
     });
   }
 
   private getQualifiaktionenListe() {
-    this.qualifikationenService.getQualifikationenListe().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c =>
-          ({ key: c.payload.doc.id, ...c.payload.doc.data() })
-        )
-      )
-    ).subscribe(res => {
-      this.qualifikationenList = res as Qualifikation[];
+    this.nutzerDaten.qualifikationen.forEach((qualifikation_key) => {
+      this.qualifikationenService.getQualifikation(qualifikation_key).snapshotChanges().pipe(
+        map(action => {
+          const data = action.payload.data() as any;
+          return { ...data };
+        })
+      ).subscribe(res => {
+        this.qualifikationenList.push(res.bezeichnung);
+      });
     });
   }
 

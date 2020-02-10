@@ -6,6 +6,6 @@ mat-card-title{
 }
 
 div {
-  fxLayout: "row wrap";
-  fxLayoutGap: "40px";
+  fxLayout: "row";
+  fxFlexAlign: "stretch";
 }

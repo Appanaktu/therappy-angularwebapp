@@ -2,78 +2,80 @@
   <h1 mat-dialog-title>Nutzerbearbeitung</h1>
   <mat-dialog-content>
     <mat-card>
+      <mat-card-header>
+      </mat-card-header>
+      <mat-card-content>
         <form [formGroup]="nutzerForm" autocomplete="off" novalidate (ngSubmit)="bearbeiteNutzer(nutzerForm.value)" fxLayout="column wrap"
-              fxLayoutAlign="center center" fxLayoutGap="10px">
-          <mat-card-content>
-              <div>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Vorname" formControlName="vorname" id="vorname">
-                  <mat-hint align="end">Nicht mehr als 60 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('vorname', 'required')">Vorname wird benötigt.</mat-error>
-                  <mat-error *ngIf="hasError('vorname', 'maxlength')">Es wurden mehr als 60 Zeichen eingetragen</mat-error>
-                </mat-form-field>
+        fxLayoutAlign="left strech" fxLayoutGap="10px">
+          <div fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="Vorname" formControlName="vorname" id="vorname">
+              <mat-hint align="end">Nicht mehr als 60 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('vorname', 'required')">Vorname wird benötigt.</mat-error>
+              <mat-error *ngIf="hasError('vorname', 'maxlength')">Es wurden mehr als 60 Zeichen eingetragen</mat-error>
+            </mat-form-field>
 
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Nachname" formControlName="nachname" id="nachname">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('nachname', 'required')">Nachname wird benötigt.</mat-error>
-                  <mat-error *ngIf="hasError('nachname', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="geburtsdatum" id="geburtsdatum"
-                      readonly (click)="picker.open()">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-              </div>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="Nachname" formControlName="nachname" id="nachname">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('nachname', 'required')">Nachname wird benötigt.</mat-error>
+              <mat-error *ngIf="hasError('nachname', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput [matDatepicker]="picker" placeholder="Geburtsdatum" formControlName="geburtsdatum" id="geburtsdatum"
+                  readonly (click)="picker.open()">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
 
-              <div>
-                <mat-form-field>
-                  <mat-label>Qualifikationen</mat-label>
-                  <mat-select formControlName="qualifikationen" id="qualifikationen" multiple>
-                    <mat-option *ngFor="let qualifikation of qualifikationenList" [value]="qualifikation.key">{{qualifikation.bezeichnung}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="hasError('qualifikationen', 'required')">Es wird mindestens eine Qualifikation benötigt</mat-error>
-                </mat-form-field>
-              </div>
+          <div fxFlex>
+            <mat-form-field fxFlex>
+              <mat-label>Qualifikationen</mat-label>
+              <mat-select formControlName="qualifikationen" id="qualifikationen" multiple>
+                <mat-option *ngFor="let qualifikation of qualifikationenList" [value]="qualifikation.key">{{qualifikation.bezeichnung}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="hasError('qualifikationen', 'required')">Es wird mindestens eine Qualifikation benötigt</mat-error>
+            </mat-form-field>
+          </div>
 
-              <div>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Strasse" formControlName="strasse" id="strasse">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('strasse', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Hausnummer" formControlName="hausnummer" id="hausnummer">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('hausnummer', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-              </div>
-              <div>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Postleitzahl" formControlName="postleitzahl" id="postleitzahl">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('postleitzahl', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Stadt" formControlName="stadt" id="stadt">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('stadt', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                  <input matInput type="text" placeholder="Land" formControlName="land" id="land">
-                  <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
-                  <mat-error *ngIf="hasError('land', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
-                </mat-form-field>
-              </div>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button color="primary" [disabled]="!nutzerForm.valid">Speichern</button>
-            <button type="button" mat-raised-button color="warn" (click)="onCancel()">Abbruch</button>
-          </mat-card-actions>
+          <div fxFlex>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="Strasse" formControlName="strasse" id="strasse">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('strasse', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="25">
+              <input matInput type="text" placeholder="Hausnummer" formControlName="hausnummer" id="hausnummer">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('hausnummer', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex>
+            <mat-form-field fxFlex="20">
+              <input matInput type="text" placeholder="Postleitzahl" formControlName="postleitzahl" id="postleitzahl">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('postleitzahl', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="Stadt" formControlName="stadt" id="stadt">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('stadt', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput type="text" placeholder="Land" formControlName="land" id="land">
+              <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
+              <mat-error *ngIf="hasError('land', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
+            </mat-form-field>
+          </div>
         </form>
-      </mat-card>
-    </mat-dialog-content>
-    <mat-dialog-actions>
-    </mat-dialog-actions>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!nutzerForm.valid">Speichern</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Abbruch</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+  </mat-dialog-actions>
 </section>

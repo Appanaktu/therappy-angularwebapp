@@ -6,6 +6,11 @@ mat-card-title{
 }
 
 div {
-  fxLayout: "row wrap";
-  fxLayoutGap: "40px";
+  fxLayout: "row";
+  fxFlexAlign: "stretch";
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }
