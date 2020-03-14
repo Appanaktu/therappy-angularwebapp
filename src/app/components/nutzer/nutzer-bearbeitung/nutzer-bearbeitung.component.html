@@ -1,13 +1,12 @@
-<section fxLayout="column" fxLayoutAlign="center center">
+<section>
   <h1 mat-dialog-title>Nutzerbearbeitung</h1>
   <mat-dialog-content>
     <mat-card>
       <mat-card-header>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="nutzerForm" autocomplete="off" novalidate (ngSubmit)="bearbeiteNutzer(nutzerForm.value)" fxLayout="column wrap"
-        fxLayoutAlign="left strech" fxLayoutGap="10px">
-          <div fxFlex>
+        <form [formGroup]="nutzerForm" autocomplete="off" novalidate>
+          <div fxLayout.gt-sm="row" fxLayout="column">
             <mat-form-field fxFlex>
               <input matInput type="text" placeholder="Vorname" formControlName="vorname" id="vorname">
               <mat-hint align="end">Nicht mehr als 60 Zeichen lang.</mat-hint>
@@ -29,40 +28,57 @@
             </mat-form-field>
           </div>
 
-          <div fxFlex>
+          <div fxLayout.gt-sm="row" fxLayout="column">
             <mat-form-field fxFlex>
-              <mat-label>Qualifikationen</mat-label>
-              <mat-select formControlName="qualifikationen" id="qualifikationen" multiple>
-                <mat-option *ngFor="let qualifikation of qualifikationenList" [value]="qualifikation.key">{{qualifikation.bezeichnung}}</mat-option>
-              </mat-select>
+              <mat-chip-list #chipList aria-label="Qualifikationsauswahl" formControlName="qualifikationen" id="qualifikationen">
+                <mat-chip
+                  *ngFor="let qualifikation of ausgewaehlteQualifikationen | async"
+                  [removable]="removable"
+                  (removed)="remove(qualifikation)">
+                  {{qualifikation.bezeichnung}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="Qualifikationen..."
+                  #qualifikationInput
+                  [formControl]="qualifikationCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let qualifikation of gefilterteQualifikationen | async" [value]="qualifikation">
+                  {{qualifikation.bezeichnung}}
+                </mat-option>
+              </mat-autocomplete>
               <mat-error *ngIf="hasError('qualifikationen', 'required')">Es wird mindestens eine Qualifikation benötigt</mat-error>
             </mat-form-field>
           </div>
 
-          <div fxFlex>
-            <mat-form-field fxFlex>
+          <div fxLayout.gt-sm="row" fxLayout="column">
+            <mat-form-field fxFlex fxFlex.gt-sm="75">
               <input matInput type="text" placeholder="Strasse" formControlName="strasse" id="strasse">
               <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
               <mat-error *ngIf="hasError('strasse', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
             </mat-form-field>
-            <mat-form-field fxFlex="25">
+            <mat-form-field fxFlex fxFlex.gt-sm="25">
               <input matInput type="text" placeholder="Hausnummer" formControlName="hausnummer" id="hausnummer">
               <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
               <mat-error *ngIf="hasError('hausnummer', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
             </mat-form-field>
           </div>
-          <div fxFlex>
-            <mat-form-field fxFlex="20">
+
+          <div fxLayout.gt-sm="row" fxLayout="column">
+            <mat-form-field fxFlex fxFlex.gt-sm="20">
               <input matInput type="text" placeholder="Postleitzahl" formControlName="postleitzahl" id="postleitzahl">
               <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
               <mat-error *ngIf="hasError('postleitzahl', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
             </mat-form-field>
-            <mat-form-field fxFlex>
+            <mat-form-field fxFlex fxFlex.gt-sm="40">
               <input matInput type="text" placeholder="Stadt" formControlName="stadt" id="stadt">
               <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
               <mat-error *ngIf="hasError('stadt', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
             </mat-form-field>
-            <mat-form-field fxFlex>
+            <mat-form-field fxFlex fxFlex.gt-sm="40">
               <input matInput type="text" placeholder="Land" formControlName="land" id="land">
               <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
               <mat-error *ngIf="hasError('land', 'maxlength')">Es wurden mehr als 100 Zeichen eingetragen</mat-error>
@@ -70,8 +86,8 @@
           </div>
         </form>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" [disabled]="!nutzerForm.valid">Speichern</button>
+      <mat-card-actions fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" [disabled]="!nutzerForm.valid" (click)="bearbeiteNutzer(nutzerForm.value)">Speichern</button>
         <button type="button" mat-raised-button color="warn" (click)="onCancel()">Abbruch</button>
       </mat-card-actions>
     </mat-card>

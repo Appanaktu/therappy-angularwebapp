@@ -50,4 +50,10 @@ export class ErrorHandlerService {
     this.dialogConfig.data = { 'errorMessage': this.errorMessage };
     this.dialog.open(ErrorDialogComponent, this.dialogConfig);
   }
+
+  public handleErrorMessage = (error: string) => {
+    this.errorMessage = error;
+    this.dialogConfig.data = { 'errorMessage': this.errorMessage };
+    this.dialog.open(ErrorDialogComponent, this.dialogConfig);
+  }
 }

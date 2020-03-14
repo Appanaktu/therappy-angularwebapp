@@ -18,7 +18,9 @@ import { MatTabsModule,
          MatDatepickerModule,
          MatNativeDateModule,
          MatDialogModule,
-         MatProgressBarModule } from  '@angular/material';
+         MatProgressBarModule,
+         MatChipsModule,
+         MatAutocompleteModule } from  '@angular/material';
 
 @NgModule({
   imports: [
@@ -41,7 +43,9 @@ import { MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatTabsModule,
@@ -62,7 +66,9 @@ import { MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatChipsModule,
+    MatAutocompleteModule
   ],
   declarations: []
 })
