@@ -5,7 +5,20 @@ mat-card-title{
     text-align: center;
 }
 
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 div {
-  fxLayout: "row wrap";
-  fxLayoutGap: "40px";
+  display: flex;
+  flex-direction: column;
 }

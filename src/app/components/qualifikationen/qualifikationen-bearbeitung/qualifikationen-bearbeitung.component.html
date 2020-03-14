@@ -1,19 +1,20 @@
-<section fxLayout="column" fxLayoutAlign="center center">
+<section>
   <h1 mat-dialog-title>Qualifikationsbearbeitung</h1>
   <mat-dialog-content>
     <mat-card>
-      <form [formGroup]="qualifikationForm" autocomplete="off" novalidate (ngSubmit)="bearbeiteQualifikaion(qualifikationForm.value)" fxLayout="column wrap"
-            fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-header>
+      </mat-card-header>
         <mat-card-content>
-            <div>
-              <mat-form-field>
+          <form [formGroup]="qualifikationForm" autocomplete="off" novalidate>
+            <div fxLayout.gt-sm="row" fxLayout="column">
+              <mat-form-field fxFlex>
                 <input matInput type="text" placeholder="Kürzel" formControlName="kuerzel" id="kuerzel">
                 <mat-hint align="end">Nicht mehr als 5 Zeichen lang.</mat-hint>
                 <mat-error *ngIf="hasError('kuerzel', 'required')">Kürzel wird benötigt.</mat-error>
                 <mat-error *ngIf="hasError('kuerzel', 'maxlength')">Es wurden mehr als 5 Zeichen eingetragen</mat-error>
               </mat-form-field>
 
-              <mat-form-field>
+              <mat-form-field fxFlex>
                 <input matInput type="text" placeholder="Bezeichnung" formControlName="bezeichnung" id="bezeichnung">
                 <mat-hint align="end">Nicht mehr als 100 Zeichen lang.</mat-hint>
                 <mat-error *ngIf="hasError('bezeichnung', 'required')">Bezeichnung wird benötigt.</mat-error>
@@ -21,12 +22,38 @@
               </mat-form-field>
 
             </div>
+
+            <div fxLayout.gt-sm="row" fxLayout="column">
+              <mat-form-field fxFlex>
+                <mat-chip-list #chipList aria-label="Therapieformsauswahl" formControlName="therapieformen" id="therapieformen">
+                  <mat-chip
+                    *ngFor="let therapieform of ausgewaehlteTherapieformen | async"
+                    [removable]="removable"
+                    (removed)="remove(therapieform)">
+                    {{therapieform.bezeichnung}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                    placeholder="Therapieformen..."
+                    #therapieformInput
+                    [formControl]="therapieformCtrl"
+                    [matAutocomplete]="auto"
+                    [matChipInputFor]="chipList">
+                </mat-chip-list>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let therapieform of gefilterteTherapieformen | async" [value]="therapieform">
+                    {{therapieform.bezeichnung}}
+                  </mat-option>
+                </mat-autocomplete>
+                <mat-error *ngIf="hasError('therapieformen', 'required')">Es wird mindestens eine Therapieform benötigt</mat-error>
+              </mat-form-field>
+            </div>
+          </form>
         </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button color="primary" [disabled]="!qualifikationForm.valid">Speichern</button>
+        <mat-card-actions fxLayoutAlign="center center">
+          <button mat-raised-button color="primary" [disabled]="!qualifikationForm.valid"  (click)="bearbeiteQualifikation(qualifikationForm.value)">Speichern</button>
           <button type="button" mat-raised-button color="warn" (click)="onCancel()">Abbruch</button>
         </mat-card-actions>
-      </form>
     </mat-card>
   </mat-dialog-content>
   <mat-dialog-actions>

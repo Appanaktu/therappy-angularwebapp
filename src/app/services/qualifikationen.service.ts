@@ -18,7 +18,7 @@ export class QualifikationenService {
     this.qualifikationenRef = db.collection(this.dbPath);
   }
 
-  public createQualifikaion = (qualifikationDaten: QualifikationDaten) => {
+  public createQualifikation = (qualifikationDaten: QualifikationDaten) => {
     return this.qualifikationenRef.add({...qualifikationDaten});
   }
 
