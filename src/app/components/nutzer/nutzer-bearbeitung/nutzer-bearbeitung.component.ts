@@ -92,6 +92,8 @@ export class NutzerBearbeitungComponent implements OnInit {
       // getNutzer wird im Anschluss an getQualifikationen aufgerufen, weil der korrekte Aufbau
       // der Nutzerdaten erforder, dass die Qualifikationsdaten bekannt sind. Da alle Aufrufe Richtung
       // Firestore asynchrone sind kann nur über den subscribe sichergestellt werden, dass dies so ist
+      //
+      // Bei besseren Ideen gerne anpassen
       if (this.data.key) {
         this.getNutzer(this.data.key).subscribe(res => {
           // Fülle Nutzerdaten
@@ -151,39 +153,62 @@ export class NutzerBearbeitungComponent implements OnInit {
   // Zugriff auf die Autocomplete-Komponente bei der Qualifikationseingabe
   @ViewChild('auto', {static: true}) matAutocomplete: MatAutocomplete;
 
-  // 
+  // Löschen einer Qualifikation
   remove(qualifikation: Qualifikation): void {
+
+    // Ermittle die Liste aller Qualifikationen aus dem Formularfeld "qualifikationen"
     var aktuelleQualifikationen = this.nutzerForm.value.qualifikationen;
+
+    // Ermittle den index der zu löschenden Qualifikation und entfernde diesen
     const index2 = aktuelleQualifikationen.indexOf(qualifikation.key);
     if (index2 >= 0) {
       aktuelleQualifikationen.splice(index2, 1);
     };
+
+    // Aktualisiere die Daten im Formularfeld dadruch wird über die Verknüpfung mit Observable
+    // die Liste "ausgewaehlteQualifikationen" ebenfalls aktualisiert
     this.nutzerForm.patchValue({qualifikationen : aktuelleQualifikationen});
+
+    // Baue die Vorschlagsliste neu auf evtl. zukünftig auch über Obervable zu lösen
     this.erstelleVorschlagsliste();
   }
 
+  // Qualifikation hinzufügen
   selected(event: MatAutocompleteSelectedEvent): void {
     var aktuelleQualifikationen = [];
+
+    // Prüfe, ob bereits Qualifikationen vorhanden sind, wenn ja erweitere die Liste,
+    // wenn nein erstelle eine neue Liste
     if (typeof this.nutzerForm.value.qualifikationen == 'string') {
       aktuelleQualifikationen = [event.option.value.key]
     } else {
       aktuelleQualifikationen = this.nutzerForm.value.qualifikationen;
       aktuelleQualifikationen.push(event.option.value.key);
     }
+
+    // Aktualisiere die Daten im Formularfeld dadruch wird über die Verknüpfung mit Observable
+    // die Liste "ausgewaehlteQualifikationen" ebenfalls aktualisiert
     this.nutzerForm.patchValue({qualifikationen : aktuelleQualifikationen});
+
+    // Baue die Vorschlagsliste neu auf evtl. zukünftig auch über Obervable zu lösen
     this.erstelleVorschlagsliste();
+
+    // Setze das Eingabefeld der Qualifikationen zurück
     this.qualifikationInput.nativeElement.value = '';
     this.qualifikationCtrl.setValue(null);
   }
 
-  private erstelleVorschlagsliste(){
-    this.qualifikationVorschlagsliste = this.qualifikationenList.filter(qualifikation => this.nutzerForm.value.qualifikationen.indexOf(qualifikation.key) < 0);
-  }
-
+  // Erstelle eine Liste der ausgewählten Qualifiaktionen
   private erstelleAusgewaehlteQualifikationen(qualifikationen: string[]): Qualifikation[] {
     return this.qualifikationenList.filter(qualifikation => qualifikationen.indexOf(qualifikation.key) >= 0);
   }
 
+  // Erstelle eine Liste an möglichen Qualifikationsvorschlägen ohne die bereits ausgewählten Qualifikationen
+  private erstelleVorschlagsliste(){
+    this.qualifikationVorschlagsliste = this.qualifikationenList.filter(qualifikation => this.nutzerForm.value.qualifikationen.indexOf(qualifikation.key) < 0);
+  }
+
+  // Filtere die Vorschlagsliste mit Hilfe der Qualifikationsbezeichnungen und eines eingegebenen Strings 
   private _filter(value: string | Qualifikation): Qualifikation[] {
     var filterValue = '';
     if ( typeof value === 'string' ){
