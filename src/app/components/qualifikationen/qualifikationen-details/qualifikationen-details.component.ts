@@ -6,7 +6,7 @@ import { Therapieform } from './../../therapieformen/_interface/therapieform.mod
 import { TherapieformenService } from '../../../services/therapieformen.service';
 
 import { map } from 'rxjs/operators';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

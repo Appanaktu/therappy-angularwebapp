@@ -6,7 +6,7 @@ import { Qualifikation } from './../../qualifikationen/_interface/qualifikation.
 import { QualifikationenService } from '../../../services/qualifikationen.service';
 
 import { map } from 'rxjs/operators';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

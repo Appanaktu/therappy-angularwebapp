@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NutzerService } from '../../../services/nutzer.service';
 import { map } from 'rxjs/operators';
 import { Nutzer } from './../_interface/nutzer.model';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { NutzerBearbeitungComponent } from './../nutzer-bearbeitung/nutzer-bearbeitung.component';
 import { NutzerDetailsComponent } from './../nutzer-details/nutzer-details.component';

@@ -3,7 +3,7 @@ import { TherapieformenService } from '../../../services/therapieformen.service'
 import { TherapieformDaten } from './../_interface/therapieformDaten.model';
 
 import { map } from 'rxjs/operators';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({

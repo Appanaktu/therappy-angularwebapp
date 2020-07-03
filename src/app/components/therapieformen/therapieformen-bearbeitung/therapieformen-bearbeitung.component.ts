@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { TherapieformDaten } from './../_interface/therapieformDaten.model';
 import { TherapieformenService } from './../../../services/therapieformen.service';
 import { ErrorHandlerService } from './../../../services/error-handler.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 
 import { SuccessDialogComponent } from './../../dialogs/success-dialog/success-dialog.component';

@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TherapieformenService } from '../../../services/therapieformen.service';
 import { map } from 'rxjs/operators';
 import { Therapieform } from '../_interface/therapieform.model';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { TherapieformenBearbeitungComponent } from './../therapieformen-bearbeitung/therapieformen-bearbeitung.component';
 import { TherapieformenDetailsComponent } from './../therapieformen-details/therapieformen-details.component';

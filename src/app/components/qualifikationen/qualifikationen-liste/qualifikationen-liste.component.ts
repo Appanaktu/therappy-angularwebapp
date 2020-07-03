@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { QualifikationenService } from '../../../services/qualifikationen.service';
 import { map } from 'rxjs/operators';
 import { Qualifikation } from './../_interface/qualifikation.model';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { QualifikationenBearbeitungComponent } from './../qualifikationen-bearbeitung/qualifikationen-bearbeitung.component';
 import { QualifikationenDetailsComponent } from './../qualifikationen-details/qualifikationen-details.component';

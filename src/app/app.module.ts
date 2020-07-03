@@ -6,7 +6,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
 
@@ -102,7 +102,7 @@ import { PflegeheimeBearbeitungComponent } from './components/pflegeheime/pflege
     PflegeheimeBearbeitungComponent,
     PflegeheimeDetailsComponent
   ],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
+  providers: [{ provide: SETTINGS, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
